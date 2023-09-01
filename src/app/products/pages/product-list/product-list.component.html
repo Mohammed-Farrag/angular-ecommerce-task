@@ -1,0 +1,31 @@
+<app-products-filter 
+(onColsCountChange)="onColsCountChange($event)"
+(onLimitChanges)="onLimitChanges($event)"
+(onSortChanges)="onSortChanges($event)"
+></app-products-filter>
+
+<div class="flex justify-center py-5">
+
+  <pagination-controls
+  class="pagination-controls"
+  previousLabel="prev" 
+  [directionLinks]="true"
+  (pageChange)="p = $event"></pagination-controls>
+</div>
+<mat-grid-list
+  gutterSize="16"
+  [cols]="cols"
+  [rowHeight]="rowHeight"
+>
+
+<mat-grid-tile *ngFor="let product of products  |  paginate: { itemsPerPage: 7, currentPage: p }">
+  <app-product-box
+  class="w-full" 
+ 
+  [fullWidthMode]=" cols === 1 " 
+  [product]="product"
+  (onAddToCartChange)="onAddToCartChange($event)"></app-product-box>
+</mat-grid-tile>
+
+
+</mat-grid-list>

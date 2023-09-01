@@ -1,0 +1,12 @@
+.pagination-controls ::ng-deep{ 
+    li.current {
+      background-color: blue !important;
+      border-radius: 7px
+    }
+    .ngx-pagination .pagination-previous a:before, 
+    .ngx-pagination .pagination-previous.disabled:before,
+    .ngx-pagination .pagination-next a:after,
+    .ngx-pagination .pagination-next.disabled:after{
+      opacity: 0
+    }
+  }

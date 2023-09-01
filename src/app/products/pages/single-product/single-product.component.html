@@ -1,0 +1,22 @@
+<mat-card>
+    <mat-card-header class="mb-5">
+      <div class="h2 mb-5">
+        {{ product.title}} 
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flex justify-around w-full">
+        <div class="p-2 ">
+
+          <img  mat-card-image [src]="product.image" width="200" height="500" />
+        </div> 
+        <div class="text-center flex flex-col gap-4 justify-between">
+            <p class="max-w-[500px]">{{ product.description }}</p>
+            <button mat-raised-button color="primary" [routerLink]="['/']">
+               go to Home 
+            </button>
+        </div>
+      </div>
+      
+    </mat-card-content>
+  </mat-card>

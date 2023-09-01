@@ -1,0 +1,45 @@
+<mat-card class="p-2 mat-elevation-z2" [ngClass]="{'text-center' : !fullWidthMode}" *ngIf="product">
+    <mat-card-content>
+
+        <div [ngClass]="{'flex text-center ': fullWidthMode}">
+            <img class="mb-1 mx-auto h-[200px]" [ngClass]="{'h-[200px]' : !fullWidthMode , 'h-[360px]' : fullWidthMode}"
+                [src]="product.image" />
+
+
+
+            <div class="w-full" [ngClass]="{'px-8 flex flex-col justify-center' : fullWidthMode}">
+                <div>
+
+                    <p class="text-lg" [ngClass]="{'text-center font-bold text-2xl': fullWidthMode}">
+                        {{product.category}}</p>
+                    <p class="truncate   px-5">{{product.title}}</p>
+                    <p class="leading-4  pt-5" *ngIf="fullWidthMode">{{product.description}}</p>
+                </div>
+
+                <div class="flex justify-around items-center px-5 mt-7">
+                    <span class="text-red-400">{{ product.price | currency}}</span>
+                    <a class="max-w-[150px] text-md" [routerLink]="['/products', product.id]" mat-raised-button
+                        color="primary"> product details</a>
+
+                    <div class="actions flex justify-between gap-2">
+                        <button class="text-grey-500 order-1" [ngClass]="{'cursor-not-allowed': !isAuth}"
+                            [disabled]="!isAuth" (click)="onAddToCart()">
+                            <mat-icon>shopping_cart</mat-icon>
+                        </button>
+                        <button class="text-grey-500 " color="warn">
+                            <mat-icon [color]="product.isFav ? 'warn' : ''"
+                                (click)="onAddToFav(product)">favorite</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<div class="my-5" *ngIf="!product">
+    loader
+</div>

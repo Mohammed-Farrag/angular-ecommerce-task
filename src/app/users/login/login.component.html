@@ -1,0 +1,53 @@
+
+<form class="w-full max-w-sm mx-auto" (ngSubmit)="submit()"  #f [formGroup]="_loginForm" >
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/3">
+        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="name">
+          Full Name
+        </label>
+      </div>
+      <div class="md:w-2/3">
+        <input 
+        formControlName="name"
+        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 
+        px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" 
+        id="name" type="text" value="Jane Doe">
+        <p class="text-red-600" *ngIf="_loginForm.get('name')?.touched &&  _loginForm.get('name')?.hasError('required')"> This field is Required </p>
+        <p class="text-red-600" *ngIf="_loginForm.get('name')?.touched && _loginForm.get('name')?.dirty &&  _loginForm.get('name')?.hasError('minlength')"> This field is 8 letters minimum </p>
+        
+      </div>
+    </div>
+    <div class="md:flex md:items-center mb-6">
+      <div class="md:w-1/3">
+        <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="password">
+          Password
+        </label>
+      </div>
+      <div class="md:w-2/3">
+        <input 
+        formControlName="password"
+        class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4
+         text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="password"
+          type="password" placeholder="******************">
+          <p class="text-red-600" *ngIf="_loginForm.get('password')?.touched &&  _loginForm.get('password')?.hasError('required')"> This field is Required </p>
+          <p class="text-red-600" *ngIf="_loginForm.get('password')?.touched &&
+           _loginForm.get('password')?.dirty  &&
+             _loginForm.get('password')?.hasError('minlength')"> This field is 8 letters minimum </p>
+          <p class="text-red-600" *ngIf="_loginForm.get('password')?.touched &&
+           _loginForm.get('password')?.dirty  &&
+             _loginForm.get('password')?.hasError('maxlength')"> This field is 20 letters maximun </p>
+          
+      </div>
+    </div>
+    <div class="md:flex md:items-center">
+      <div class="md:w-1/3"></div>
+      <div class="md:w-2/3">
+        <button 
+        [disabled]="!_loginForm.valid"
+        class="shadow bg-blue-500 hover:bg-blue-400 focus:shadow-outline focus:outline-none
+         text-white font-bold py-2 px-4 rounded" type="submit">
+          Login
+        </button>
+      </div>
+    </div>
+  </form>

@@ -1,0 +1,92 @@
+<mat-toolbar class="mx-auto">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+        (click)="toggleDrawer()">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <span routerLink="/" class="" style="cursor: pointer;">My App</span>
+
+
+    <span class="example-spacer"></span>
+    <button class="bg-blue-700 py-2 px-4 text-white " (click)="search(searcValue)">Search</button>
+    <input type="text" class="rounded-md border-2 py-2 px-4 " placeholder="search..." [(ngModel)]="searcValue"  />
+    <button mat-icon-button [matMenuTriggerFor]="favMenu">
+        <mat-icon [matBadge]="favs.length" matBadgePosition="before"
+            [matBadgeHidden]="favs.length == 0">favorite</mat-icon>
+    </button>
+
+    <mat-menu #favMenu="matMenu">
+        <div class="p-3 divide-y divide-solid  ">
+
+            <div class="pb-3 flex justify-between">
+                <span class="mr-16"> {{ favs.length }} Favourites</span>
+                <a routerLink="products/favourites"> View Favourites</a>
+            </div>
+
+            <div class="py-3" *ngIf="favs">
+
+                <div class="pb-3 flex justify-between" *ngFor="let fav of favs">
+                    <span class="mr-16 font-light truncate">{{fav.title}} </span>
+                    <a routerLink="cart " class="font-bold"> {{ fav.price | currency }}</a>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </mat-menu>
+
+    <button mat-icon-button [matMenuTriggerFor]="shoppingMenu">
+
+        <mat-icon [matBadge]="itemsQuantity" [matBadgeHidden]="!itemsQuantity" matBadgePosition="before"
+            matBadgeColor="warn">shopping_cart</mat-icon>
+    </button>
+
+
+    <mat-menu #shoppingMenu="matMenu">
+        <div class="p-3 divide-y divide-solid ">
+
+            <div class="pb-3 flex justify-between">
+                <span class="mr-16"> {{itemsQuantity}} items</span>
+                <a routerLink="cart"> View Cart</a>
+            </div>
+
+            <div class="py-3" *ngIf="cart.items.length">
+
+                <div class="pb-3 flex justify-between" *ngFor="let item of cart.items">
+                    <span class="mr-16 font-light">{{item.quantity}} x {{ item.name}} </span>
+                    <a routerLink="cart " class="font-bold"> {{ item.price | currency }}</a>
+                </div>
+
+
+            </div>
+            <div class="py-2 font-light flex justify-between">
+                Total:
+                <span class="font-bold">{{ getTotal(cart.items) | currency}}</span>
+            </div>
+
+            <div class="py-3 flex justify-between ">
+                <button class="bg-rose-700 text-white w-9 h-9 rounded-full" (click)="onClearCart()">
+                    <mat-icon> remove_shopping_cart</mat-icon>
+                </button>
+                <button class="bg-green-700 text-white w-9 h-9 rounded-full">
+                    <mat-icon> shopping_cart</mat-icon>
+                </button>
+            </div>
+        </div>
+    </mat-menu>
+
+    <button *ngIf="isAuth" mat-icon-button matTooltip="Profile" routerLink="/users/profile">
+        <mat-icon>account_circle</mat-icon>
+    </button>
+
+    <button mat-icon-button matTooltip="Login" routerLink="/users/login" *ngIf="!isAuth">
+        <mat-icon>login</mat-icon>
+    </button>
+
+    <button *ngIf="isAuth" (click)="logout()" mat-icon-button matTooltip="Logout" routerLink="">
+        <mat-icon>logout</mat-icon>
+    </button>
+
+</mat-toolbar>

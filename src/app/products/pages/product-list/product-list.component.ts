@@ -20,7 +20,7 @@ export class ProductListComponent {
     }
 
     p:number = 1
-  cols: number = 3;
+  cols: number = 2;
   rowHeight = ROWS_HEIGHT[this.cols];
   category : string | undefined;
   products : Product[] = []
